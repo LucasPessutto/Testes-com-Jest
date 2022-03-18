@@ -1,4 +1,4 @@
-const { queryString, parse } = require("./queryString");
+import { queryString, parse } from "./queryString";
 
 describe("Objeto para query string", () => {
   it("Deve criar um query string válido quando o objeto é igual", () => {
@@ -44,6 +44,15 @@ describe("Query string para objeto", () => {
     const qs = "nome=Lucas";
     expect(parse(qs)).toEqual({
       nome: "Lucas",
+    });
+  });
+
+  it("Deve converter query string objeto sem separar os valores", () => {
+    const qs = "nome=Lucas&habilidades=JS,TDD";
+
+    expect(parse(qs)).toEqual({
+      nome: "Lucas",
+      habilidades: ["JS", "TDD"],
     });
   });
 });
